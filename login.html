@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(to right, #6a6f78, #a0c1d1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 850px;
+      max-width: 95%;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      overflow: hidden;
+      display: flex;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .login-box {
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+    }
+
+    .left {
+      flex: 1;
+      padding: 40px;
+      background: linear-gradient(to bottom, #d9e4f5, #9bd1e3);
+    }
+
+    .left h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .left p {
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .left form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .left label {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .left input {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      outline: none;
+      transition: border 0.3s ease;
+    }
+
+    .left input:focus {
+      border: 1px solid #7f00ff;
+    }
+
+    .left button {
+      padding: 10px;
+      background: linear-gradient(to right, #7f00ff, #3c82f4);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .left button:hover {
+      background: linear-gradient(to right, #3c82f4, #7f00ff);
+    }
+
+    .left .or {
+      text-align: center;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .social-icons img {
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icons img:hover {
+      transform: scale(1.2);
+    }
+
+    .signup {
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .signup a {
+      text-decoration: none;
+      color: #7f00ff;
+      font-weight: 600;
+    }
+
+    .right {
+      flex: 1;
+      background: #c0e5f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .right img {
+      width: 100%;
+      max-height: 600px;
+      object-fit: contain;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0.1;
+        transform: translateY(500px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .login-box {
+        flex-direction: column;
+      }
+
+      .right img {
+        width: 60%;
+        padding: 20px 0;
+      }
+    }
+    /* Dark mode support */
+    body.dark-mode .left,
+    body.dark-mode .right {
+      background: #1f1f1f;
+      color: #f5f5f5;
+    }
+
+    body.dark-mode input {
+      background-color: #ff0000;
+      color: #f5f5f5;
+      border: 1px solid #555;
+    }
+
+    .loader-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgb(189, 230, 241);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .loader-overlay.visible {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .loading-dots-swap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+      height: 60px;
+      position: relative;
+    }
+
+    .dot {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #3498db;
+    }
+
+    .dot:nth-child(1) {
+      animation: move1 3s infinite ease-in-out;
+      background: #3498db;
+    }
+    .dot:nth-child(2) {
+      animation: move2 3s infinite ease-in-out;
+      background: #e67e22;
+    }
+    .dot:nth-child(3) {
+      animation: move3 3s infinite ease-in-out;
+      background: #2ecc71;
+    }
+    .dot:nth-child(4) {
+      animation: move4 3s infinite ease-in-out;
+      background: #9b59b6;
+    }
+    .dot:nth-child(5) {
+      animation: move5 3s infinite ease-in-out;
+      background: #e74c3c;
+    }
+
+    @keyframes move1 {
+      0% {
+        transform: translateX(-80px) scale(1);
+        z-index: 1;
+      }
+      25% {
+        transform: translateX(-40px) scale(1.3);
+        z-index: 3;
+      }
+      50% {
+        transform: translateX(0px) scale(1);
+        z-index: 2;
+      }
+      75% {
+        transform: translateX(40px) scale(0.9);
+        z-index: 1;
+      }
+      100% {
+        transform: translateX(80px) scale(0.8);
+        z-index: 0;
+      }
+    }
+      
+    @keyframes move2 {
+      0% {
+        transform: translateX(-40px) scale(0.9);
+        z-index: 1;
+      }
+      25% {
+        transform: translateX(0px) scale(1.3);
+        z-index: 3;
+      }
+      50% {
+        transform: translateX(40px) scale(1);
+        z-index: 2;
+      }
+      75% {
+        transform: translateX(80px) scale(0.9);
+        z-index: 1;
+      }
+      100% {
+        transform: translateX(-80px) scale(0.8);
+        z-index: 0;
+      }
+    }
+
+    @keyframes move3 {
+      0% {
+        transform: translateX(0px) scale(1);
+        z-index: 2;
+      }
+      25% {
+        transform: translateX(40px) scale(0.9);
+        z-index: 1;
+      }
+      50% {
+        transform: translateX(80px) scale(0.8);
+        z-index: 0;
+      }
+      75% {
+        transform: translateX(-80px) scale(1);
+        z-index: 1;
+      }
+      100% {
+        transform: translateX(-40px) scale(1.3);
+        z-index: 3;
+      }
+    }
+
+    @keyframes move4 {
+      0% {
+        transform: translateX(40px) scale(0.9);
+        z-index: 1;
+      }
+      25% {
+        transform: translateX(80px) scale(0.8);
+        z-index: 0;
+      }
+      50% {
+        transform: translateX(-80px) scale(1);
+        z-index: 1;
+      }
+      75% {
+        transform: translateX(-40px) scale(1.3);
+        z-index: 3;
+      }
+      100% {
+        transform: translateX(0px) scale(1);
+        z-index: 2;
+      }
+    }
+
+    @keyframes move5 {
+      0% {
+        transform: translateX(80px) scale(0.8);
+        z-index: 0;
+      }
+      25% {
+        transform: translateX(-80px) scale(1);
+        z-index: 1;
+      }
+      50% {
+        transform: translateX(-40px) scale(1.3);
+        z-index: 3;
+      }
+      75% {
+        transform: translateX(0px) scale(1);
+        z-index: 2;
+      }
+      100% {
+        transform: translateX(40px) scale(0.9);
+        z-index: 1;
+      }
+    }
+    
+    .toggle-switch-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+    }
+
+    .toggle-switch-container span {
+      font-weight: bold;
+      font-size: 1.1em;
+      color: #333;
+      transition: color 0.3s ease;
+    }
+
+    body.dark-mode .toggle-switch-container span {
+      color: #f5f5f5;
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+      margin: 0 15px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #adc6df;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    /* Dark mode support */
+body.dark-mode { /* Apply dark mode to the body */
+   background: linear-gradient(to right, #2c3e50, #0f2027);
+  color: #ffffff; /* Light text color for better contrast */
+}
+
+
+body.dark-mode .right {
+  background: linear-gradient(to right, #000000, #10151a); /* Keep these for the container's internal sections */
+  color: #f5f5f5;
+}
+body.dark-mode .left {
+    background: linear-gradient(to right, #000000, #000000);
+}
+body.dark-mode input {
+  background-color: #e3e3e3;
+  color: #ffffff;
+  border: 1px solid #555;
+}
+body.dark-mode button{
+    background-color: #2ecc71;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="login-box">
+      <div class="left">
+        <h2>Log In</h2>
+        <p>Welcome back! Please log in to your account.</p>
+        <form id="loginForm">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Enter your email" required>
+          <div id="emailError" style="color:red; font-size: 12px; margin-bottom: 10px;"></div>
+
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password" required>
+          <div id="passwordError" style="color:red; font-size: 12px; margin-bottom: 10px;"></div>
+
+          <button type="submit">LOGIN</button>
+        </form>
+
+        <p class="or">or connect with</p>
+        <div class="social-icons">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub">
+          <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+        </div>
+        <p class="signup">Don't have an account? <a href="#" id="createAccountLink">create new account</a></p>
+      </div>
+      <div class="right">
+        <img src="0.png" alt="girl-laptop">
+      </div>
+    </div>
+  </div>
+  <div class="loader-overlay" id="loaderOverlay">
+    <div class="loading-dots-swap">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+  <div class="toggle-switch-container">
+    <label class="toggle-switch">
+      <input type="checkbox" id="darkModeToggle">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <script>
+    // Helper function to display error messages
+    function showError(elementId, message) {
+      const errorElement = document.getElementById(elementId);
+      if (errorElement) {
+        errorElement.textContent = message;
+      }
+    }
+
+    // User data for login
+    const users = [
+      { email: "ayushraj234234@gmail.com", password: "Password", redirect: "postnotice.html" },
+      { email: "ayush@gmail.com", password: "Key@123", redirect: "https://www.youtube.com" },
+      { email: "ayushraj234234234@gmail.com", password: "ayush@12345", redirect: "https://www.chatgpt.com" },
+      { email: "rajeshkumar2470@gmail.com", password: "Ayush@12345", redirect: "test_6.html" }
+    ];
+
+    // Login Form Submission
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent default form submission
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      // Clear previous error messages
+      showError("emailError", "");
+      showError("passwordError", "");
+
+      let isValid = true; // Flag to track overall form validity
+
+      if (!email) {
+        showError("emailError", "Email is required.");
+        isValid = false;
+      }
+
+      if (!password) {
+        showError("passwordError", "Password is required.");
+        isValid = false;
+      }
+
+      if (!isValid) {
+        // If there are validation errors, stop here
+        return;
+      }
+
+      // Find user based on email
+      const foundUser = users.find(user => user.email === email);
+
+      if (!foundUser) {
+        showError("emailError", "Email not registered.");
+      } else if (foundUser.password !== password) {
+        showError("passwordError", "Incorrect password.");
+      } else {
+        // Successful login, ask for confirmation before redirecting
+        if (confirm("Do you want to log in to this account successfully?")) {
+          // Show loader before redirection
+          const loader = document.getElementById('loaderOverlay');
+          loader.classList.add('visible');
+
+          setTimeout(() => {
+  window.location.href = foundUser.redirect;
+}, 3000);  // You can use 3000 or 5000 ms
+ // Small delay to show loader
+        }
+      }
+    });
+
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    function applyDarkMode(isDarkMode) {
+      if (isDarkMode) {
+        body.classList.add('dark-mode');
+      } else {
+        body.classList.remove('dark-mode');
+      }
+    }
+
+    // Apply saved dark mode preference on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+      if (darkModeToggle) {
+        darkModeToggle.checked = savedDarkMode;
+        applyDarkMode(savedDarkMode);
+
+        // Add event listener for dark mode toggle change
+        darkModeToggle.addEventListener('change', () => {
+          const isDarkMode = darkModeToggle.checked;
+          applyDarkMode(isDarkMode);
+          localStorage.setItem('darkMode', isDarkMode);
+        });
+      }
+    });
+
+    // "Create New Account" link functionality
+    document.getElementById('createAccountLink').addEventListener('click', function (event) {
+      event.preventDefault(); // Prevent default link behavior
+      const loader = document.getElementById('loaderOverlay');
+      loader.classList.add('visible'); // Show loader
+
+      // Redirect after a short delay
+      setTimeout(function () {
+        window.location.href = 'signin.html'; // Assuming 'signin.html' is your signup page
+      }, 5000); // Adjust delay as needed
+    });
+  </script>
+
+</body>
+</html>
+

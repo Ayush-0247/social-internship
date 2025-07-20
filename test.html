@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>powerlook</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      background-color: rgb(255, 255, 255);
+      height: 100vh;
+      width: 100vw;
+    }
+
+    header {
+      max-height: 10vh;
+      width: 100vw;
+    }
+
+    .header-box {
+      display: flex;
+      background-color: rgb(255, 255, 255);
+      padding: 1vh 1vw;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo img {
+      width: 14vw;
+    }
+
+    .header-btns {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.2vw;
+    }
+
+    .header-btns button {
+      transition: color 1.2s;
+      border: none;
+      background-color: transparent;
+      font-weight: bold;
+    }
+
+    .header-btns button:hover {
+      color: rgb(194, 120, 120);
+    }
+
+    .header-btns input {
+      height: 3vh;
+    }
+
+
+
+    .sliding-img {
+      background-color: black;
+      height: 65vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+
+    .sliding-wrapper {
+      display: flex;
+      width: 200vw;
+      height: 100%;
+      animation: slide 6s infinite;
+    }
+
+    .sliding-wrapper img {
+      width: 100vw;
+      height: 100%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+
+    @keyframes slide {
+      0% {
+        transform: translateX(0);
+      }
+
+      45% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(-100vw);
+      }
+
+      95% {
+        transform: translateX(-100vw);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+
+
+
+
+    .category-box {
+      height: 60vh;
+      background-color: azure;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2vh 0;
+      box-sizing: border-box;
+    }
+
+    .category-box h2 {
+      color: black;
+      font-size: 35px;
+      margin-bottom: 20px;
+    }
+
+    .category-box h2 span {
+      color: red;
+    }
+
+    .cloth-box {
+      width: 80vw;
+      display: flex;
+      /* Enables wrapping on smaller screens */
+      gap: 2vw;
+      justify-content: center;
+      align-items: stretch;
+      padding: 2vh;
+      box-sizing: border-box;
+    }
+
+    .cloth-box-ctr {
+      width: 45%;
+      /* Changed from 50% to prevent overflow due to gap */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1vh;
+      box-sizing: border-box;
+      border-radius: 10px;
+      color: white;
+    }
+
+    .cloth-box-ctr img:hover {
+      transform: scale(1.1);
+    }
+
+    .cloth-box-ctr img {
+      width: 100%;
+      height: auto;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: transform 0.5s ease;
+    }
+
+    .cloth-box-ctr h3 {
+      text-align: center;
+      margin-top: 15px;
+      margin-bottom: 0px;
+      font-size: 30px;
+      color: black;
+      cursor: pointer;
+    }
+
+    .middle-img {
+      height: 40vh;
+      padding: 10vh;
+      justify-content: center;
+      display: flex;
+      align-items: center;
+    }
+
+    .middle-img img {
+      max-height: 90%;
+    }
+
+    .new-deals {
+      background-color: rgb(255, 255, 255);
+      height: 55vh;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      gap: 20px;
+      margin-top: 0;
+    }
+
+    .new-deals img {
+      height: 80%;
+      transition: transform 0.5s ease;
+    }
+
+    .new-deals img:hover {
+      transform: scale(1.05);
+    }
+
+    .new-deal {
+      font-size: 30px;
+      align-items: center;
+      text-align: center;
+      background-color: rgb(237, 237, 237);
+      margin: 0;
+      padding: 0;
+    }
+
+    .forward {
+      height: 60vh;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    .forward img {
+      height: 100%;
+      width: 85vw;
+    }
+
+
+    .new-arrival {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(255, 255, 255);
+      width: 98vw;
+    }
+
+    .new-arrival h1 {
+      margin-top: 20vh;
+      margin-bottom: 5vh;
+      font-size: 30px;
+      color: black;
+      font-weight: bold;
+    }
+
+    .new-arrival h1 span {
+      color: blue;
+      font-size: 26px;
+    }
+
+    .box3 {
+      width: 95%;
+      background-color: rgb(255, 255, 255);
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1vw;
+    }
+
+    .box4 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 1px 2px 20px;
+      border-radius: 5px;
+      width: 20%;
+      background-color: rgb(255, 255, 255);
+      transition: transform 0.5s ease;
+    }
+
+    .box4:hover {
+      transform: scale(1.05);
+    }
+
+    .box4 img {
+      width: 90%;
+      margin-top: 12px;
+    }
+
+    .view-btn {
+      background-color: rgb(255, 255, 255);
+      height: 7vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .view-btn button {
+      background-color: rgb(255, 255, 255);
+      padding: 0;
+      margin: 0;
+      border: solid 2px red;
+      padding: 2vh 2vw;
+      color: red;
+      font-weight: bolder;
+    }
+
+    .empower-img {
+      margin-top: 10vh;
+      width: 100%;
+      background-color: rgb(255, 255, 255);
+      height: 35vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;margin-bottom: 50vh;
+    }
+
+    .empower-img img {
+      height: 100%;
+      width: 80%;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-box">
+      <div class="logo"><img src="https://www.powerlook.in/images/Logo/pl-logo.png?aio=w-384"></div>
+      <div class="header-btns">
+        <button>SUMMER-2025</button>
+        <BUtton>NEW ARRIVALS</BUtton>
+        <BUtton>T-SHIRTS</BUtton>
+        <BUtton>SHIRTS</BUtton>
+        <button>BOTTOMS</button>
+        <button>JACKETS</button>
+        <button>ACCESSSORIES</button>
+        <input type="text" placeholder="&#128269;
+ searh for product">
+        <button> &#128722;</button>
+        <button>&#128100;</button>
+      </div>
+    </div>
+  </header>
+  <section class="sliding-img">
+    <div class="sliding-wrapper">
+      <img src="https://media.powerlook.in/mycustomfolder/banner-2_11_.jpg?aio=w-3840" alt="">
+      <img src="https://media.powerlook.in/mycustomfolder/banner-1_14_.jpg?aio=w-3840" alt="">
+    </div>
+
+  </section>
+  <section class="category-box">
+    <h2>Category <span>Collections</span></h2>
+    <div class="cloth-box">
+      <div class="cloth-box-ctr">
+        <img src="https://media.powerlook.in/catalog/category/t-shirts-1_3_.jpg?aio=w-640" alt="">
+        <h3>Tshirts</h3>
+      </div>
+      <div class="cloth-box-ctr">
+        <img src="https://media.powerlook.in/catalog/category/shirts-may2025.jpg?aio=w-640" alt="">
+        <h3>Tshirts</h3>
+      </div>
+      <div class="cloth-box-ctr">
+        <img src="https://media.powerlook.in/catalog/category/cargo-may2025.jpg?aio=w-640" alt="">
+        <h3>Tshirts</h3>
+      </div>
+      <div class="cloth-box-ctr">
+        <img src="https://media.powerlook.in/catalog/category/jackets-may2025.jpg?aio=w-640" alt="">
+        <h3>Tshirts</h3>
+      </div>
+      <div class="cloth-box-ctr">
+        <img src="https://media.powerlook.in/catalog/category/denim-may2025.jpg?aio=w-640" alt="">
+        <h3>Tshirts</h3>
+      </div>
+      <div class="cloth-box-ctr">
+        <img src="https://media.powerlook.in/catalog/category/699-may2025.jpg?aio=w-640" alt="">
+        <h3>Tshirts</h3>
+      </div>
+    </div>
+
+  </section>
+  <div class="middle-img">
+    <img src="https://media.powerlook.in/mycustomfolder/app_banner.jpg?aio=w-3840" alt="">
+  </div>
+  <h3 class="new-deal">New Deals, New Trends</h3>
+  <div class="new-deals">
+    <img src="https://media.powerlook.in/mycustomfolder/2_29_.jpg?aio=w-1080" alt="">
+    <img src="https://media.powerlook.in/mycustomfolder/1_40__2.jpg?aio=w-1080" alt="">
+    <img src="https://media.powerlook.in/mycustomfolder/2_28__2.jpg?aio=w-1080" alt="">
+  </div>
+  <div class="forward">
+    <img src="https://media.powerlook.in/mycustomfolder/small_banner-1_3_.jpg?aio=w-3840" alt="">
+  </div>
+  <div class="new-arrival">
+    <h1>NEW <span>ARRIVALS</span></h1>
+    <div class="box3">
+      <div class="box4">
+        <img src="https://media.powerlook.in/catalog/product/1/3/1341421_3_.jpg?aio=w-640" alt="">
+        <p>dark sky checks shirt</p>
+        <p>69$</p>
+      </div>
+
+
+
+      <div class="box4">
+        <img src="https://media.powerlook.in/catalog/product/1/3/1349210_3_.jpg?aio=w-640" alt="">
+        <p>dark sky checks shirt</p>
+        <p>69$</p>
+      </div>
+
+      <div class="box4">
+        <img src="https://media.powerlook.in/catalog/product/1/3/1360810_3_.jpg?aio=w-640" alt="">
+        <p>dark sky checks shirt</p>
+        <p>69$</p>
+      </div>
+
+      <div class="box4">
+        <img src="https://media.powerlook.in/catalog/product/1/2/1299521_4_.jpg?aio=w-640" alt="">
+        <p>dark sky checks shirt</p>
+        <p>69$</p>
+      </div>
+
+      <div class="box4">
+        <img src="https://media.powerlook.in/catalog/product/1/3/1338140_3_.jpg?aio=w-640" alt="">
+        <p>dark sky checks shirt</p>
+        <p>69$</p>
+      </div>
+
+      <div class="box4">
+        <img src="https://media.powerlook.in/catalog/product/1/2/1299821_4_.jpg?aio=w-640" alt="">
+        <p>dark sky checks shirt</p>
+        <p>69$</p>
+      </div>
+
+      <div class="box4">
+        <img src="https://media.powerlook.in/catalog/product/1/3/1331860_2_.jpg?aio=w-640" alt="">
+        <p>dark sky checks shirt</p>
+        <p>69$</p>
+      </div>
+
+      <div class="box4">
+        <img src="https://media.powerlook.in/catalog/product/1/3/1357010_3_.jpg?aio=w-640" alt="">
+        <p>dark sky checks shirt</p>
+        <p>69$</p>
+      </div>
+    </div>
+  </div>
+  <div class="view-btn">
+    <button>VIEW ALL PRODUCTS -></button>
+  </div>
+  <div class="empower-img">
+    <img src="https://media.powerlook.in/mycustomfolder/bottom_banner.jpg?aio=w-3840" alt="">
+  </div>
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit quae dolorum minima quasi quibusdam fuga. Nisi a aperiam nemo facilis, sequi suscipit quasi dolores, cumque rem id iusto. Possimus, ipsum!</p>
+</body>
+
+</html>

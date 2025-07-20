@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: white;
+            color: black;
+            height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+        }
+
+        /* --- Header Section --- */
+        .header {
+            width: 100vw;
+            height: 7vh;
+            background-color: rgb(255, 255, 255);
+            padding: 1% 0%;
+            position: sticky;
+            top: 0;
+            /* Ensures header sticks to the top */
+            z-index: 999;
+            /* To keep it above other content */
+        }
+
+        .navbar {
+            display: flex;
+            flex-direction: row;
+            background-color: rgb(255, 255, 255);
+            justify-content: space-between;
+            align-items: center;
+            padding: 0vw 2vw;
+        }
+
+        .logo {
+            font-size: 2vw;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: red;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            margin: 0 1vw;
+            font-size: 1.2vw;
+            font-weight: 200;
+            padding: 0.5vw 0.5vw;
+            color: inherit;
+            /* Inherit color from parent for better control */
+            transition: color 0.3s, box-shadow 0.3s;
+            /* Add transition for smoother hover */
+        }
+
+        .nav-links a:hover {
+            color: red;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+            /* Added rgba for softer shadow */
+        }
+
+        .btn {
+            background-color: blue;
+            border: none;
+            color: white;
+            padding: 0.7vw 2vw;
+            border-radius: 0.5vw;
+            cursor: pointer;
+            /* Add cursor for better UX */
+            transition: background-color 0.3s;
+            /* Smooth transition */
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            /* Darker blue on hover */
+        }
+        .main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3vw 1vw;
+  background-color: #f9f9f9;
+  height: 90vh;
+}
+
+.main h1 {
+  font-size: 2.5vw;
+  margin-bottom: 2vw;
+  color: #333;
+}
+
+.form-body {
+  background-color: #ffffff;
+  padding: 2vw;
+  border-radius: 1vw;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 500px;
+}
+
+form label {
+  display: block;
+  font-size: 1.2vw;
+  margin-bottom: 0.5vw;
+  color: #333;
+}
+
+form input[type="text"],
+form textarea {
+  width: 100%;
+  padding: 0.8vw;
+  font-size: 1vw;
+  border: 1px solid #ccc;
+  border-radius: 0.5vw;
+  margin-bottom: 1.5vw;
+  box-sizing: border-box;
+}
+
+form textarea {
+  resize: vertical;
+}
+
+form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 1vw 2vw;
+  font-size: 1.2vw;
+  border-radius: 0.5vw;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2vw;
+  }
+
+  .nav-links {display: none;
+    margin-top: 1vw;
+    width: 100%;
+  }
+
+  .nav-links a {
+    display: block;
+    font-size: 4vw;
+    margin: 2vw 0;
+  }
+
+  .logo {
+    font-size: 6vw;
+  }
+
+  .btn {
+    font-size: 4vw;
+    padding: 2vw 4vw;
+  }
+
+  .main {
+    padding: 5vw 3vw;
+  }
+
+  .main h1 {
+    font-size: 6vw;
+    text-align: center;
+  }
+
+  .form-body {
+    padding: 5vw;
+    border-radius: 4vw;
+    box-shadow: none;
+    width: 100%;
+  }
+
+  form label {
+    font-size: 4vw;
+  }
+
+  form input[type="text"],
+  form textarea {
+    font-size: 3.5vw;
+    padding: 2vw;
+    margin-bottom: 4vw;
+    border-radius: 2vw;
+  }
+
+  form button {
+    font-size: 4vw;
+    padding: 3vw 5vw;
+    border-radius: 2vw;
+  }
+}
+
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="navbar">
+            <div class="logo">Notice<span>X</span></div>
+            <nav class="nav-links">
+                <a href="#">Our Moto</a>
+                <a href="#">About Us</a>
+                <a href="#">Events</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <section class="main">
+        <h1>Post a new notice.</h1>
+        <div class="form-body">
+            <form id="noticeForm" action="notice.html" method="get">
+  <label for="title">Title:</label><br>
+  <input type="text" id="title" name="title" required><br><br>
+
+  <label for="content">Content:</label><br>
+  <textarea id="content" name="content" rows="5" cols="30" required></textarea><br><br>
+
+  <button type="submit">Post Notice</button>
+</form>
+
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('noticeForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+
+            // Get existing notices
+            let notices = JSON.parse(localStorage.getItem('notices')) || [];
+
+            // Add new notice
+            notices.push({ title, content });
+
+            // Save back to localStorage
+            localStorage.setItem('notices', JSON.stringify(notices));
+
+            // Redirect to notice.html
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+
+</html>

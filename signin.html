@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create New Account</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(to right, #cce2f2, #6b9ac4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #f0f8ff;
+      display: flex;
+      width: 850px;
+      height: 575px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+
+    .signup-container {
+      flex: 1;
+      padding-left: 30px;
+      padding-right: 25px;
+      padding-top: 25px;
+      background: linear-gradient(to right, #f4f7fa, #d0f0f6);
+      transition: background-color 0.5s ease;
+    }
+.signup-container.dark {
+           background: linear-gradient(to right, #2b2b2b, #444);
+        }
+    .signup-container h2 {
+      font-size: 26px;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: #333;
+      font-family: 'Times New Roman', Times, serif;
+    }
+ .signup-container.dark h2 {
+            color: #fff;
+        }
+
+    .form-group {
+      margin-bottom: 7px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+.signup-container.dark .form-group label {
+            color: #fff;
+        }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+.form-group input:hover {
+            border-color: #00bbff;
+            background-color: #e9e6e6;
+        }
+    .signup-btn {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      background: linear-gradient(to right, #6b00ff, #3e80ff);
+      color: white;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .signup-btn:hover {
+      background: linear-gradient(to right, #5600c9, #2b66cc);
+    }
+
+    .signup-container p {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .signup-container a {
+      color: #007bff;
+      text-decoration: none;
+    }
+/* Dark Mode Styles */
+        body.dark .signup-btn {
+            background: linear-gradient(135deg, #333, #444);
+            color: #f1f1f1;
+        }
+
+        body.dark .signup-btn:hover {
+            background: linear-gradient(to right, #666, #888);
+            transform: scale(1.05);
+        }
+
+        /* Dark mode styles */
+        body.dark {
+            background: linear-gradient(135deg, #111, #333);
+            color: #ddd;
+        }
+
+        .container.dark {
+            background: #222;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.7);
+        }
+
+        .signup-container.dark .form-group input {
+            background-color: #444;
+            border-color: #666;
+            color: #fff;
+        }
+
+        .signup-container.dark .form-group input:hover {
+            background-color: #555;
+            border-color: #888;
+        }
+    .image-section {
+      flex: 1;
+       background: linear-gradient(to right, #d4e4f7, #f7f9fb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .image-section img {
+      width: 100%;
+      max-width: 500px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    /* Toggle Switch Placeholder (style only) */
+    .toggle-switch-container {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+    }
+ @keyframes fadeIn {
+            from {
+                opacity: 0.0;
+                transform: translateX(500px); 
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+        .image-section.dark {
+            background: linear-gradient(to bottom right, #222, #444);
+        }
+      /* Toggle Switch Styles */
+        .toggle-switch-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            position: absolute;
+            top: 10px;
+            right: 5px;
+            z-index: 100;
+        }
+
+        .toggle-switch-container span {
+            font-weight: bold;
+            font-size: 0.8em;
+            color: #333;
+            transition: color 0.3s ease;
+            background-color: #4a4b4a;
+        }
+
+        body.dark-mode .toggle-switch-container span {
+            color: #f5f5f5;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin: 0 15px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .9s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #adc6df;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* --- Loading Overlay Styles --- */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to left, #71b0cd, #efeef0);/* Semi-transparent white background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Ensures it's on top of other content */
+            opacity: 0; /* Start invisible */
+            visibility: hidden; /* Hide from screen readers and pointer events */
+            transition: opacity 0.5s ease, visibility 0.5s ease; /* Smooth fade in/out */
+        }
+        .loading-overlay.visible {
+            opacity: 1; /* Make visible */
+            visibility: visible; /* Make interactive */
+        }
+
+        /* --- Sequential Grow and Fade Loader Styles --- */
+        .grow-fade-loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px; /* Space for dots to grow */
+        }
+
+        .grow-fade-loader .dot {
+            width: 18px; /* Initial size of dots */
+            height: 18px;
+            background-color: #ff0000; /* Starting color */
+            border-radius: 50%;
+            margin: 0 8px; /* Spacing between dots */
+            opacity: 0; /* Start invisible */
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* Initial subtle shadow */
+            animation: growAndFade 1.8s infinite ease-out forwards; /* Main animation for growth and fade */
+        }
+
+        /* Stagger the animation start for each dot to create the sequence */
+        .grow-fade-loader .dot:nth-child(1) { animation-delay: 0s; }
+        .grow-fade-loader .dot:nth-child(2) { animation-delay: 0.15s; }
+        .grow-fade-loader .dot:nth-child(3) { animation-delay: 0.30s; }
+        .grow-fade-loader .dot:nth-child(4) { animation-delay: 0.45s; }
+        .grow-fade-loader .dot:nth-child(5) { animation-delay: 0.60s; }
+
+        /* Keyframes for the grow and fade animation */
+        @keyframes growAndFade {
+            0% {
+                transform: scale(0.1); /* Start very small */
+                opacity: 0; /* Start completely transparent */
+                background-color: #007bff; /* Start color */
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+            30% {
+                transform: scale(1); /* Grow to full size */
+                opacity: 1; /* Become fully visible */
+                background-color: #5bc0de; /* Change to a lighter color */
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+            }
+            70% {
+                transform: scale(1.2); 
+                opacity: 0;
+                background-color: #d9534f; 
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+            }
+            100% {
+                transform: scale(0.1); 
+                opacity: 0; 
+                background-color: #007bff; 
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+        }body, 
+.container,
+.signup-container,
+.signup-container h2,
+.signup-container .form-group label,
+.signup-container .form-group input,
+.image-section {
+  transition: background-color 1s ease, color 1s ease, border-color 1s ease;
+}
+.image-section {
+  transition: background-color 1s ease;
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="toggle-switch-container">
+    <label class="toggle-switch">
+      <input type="checkbox" id="darkModeToggle">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="container">
+    <div class="signup-container">
+      <h2>Create a new account</h2>
+      <form id="signupForm" onsubmit="return validateForm()" method="POST">
+
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter your username" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input type="password" id="confirm-password" name="confirm-password" placeholder="Re-enter your password" required>
+        </div>
+        <div class="form-group">
+          <label for="contact-number">Contact Number</label>
+          <input type="tel" id="contact-number" name="contact-number" placeholder="Enter your contact number" required>
+        </div>
+        <button type="submit" class="signup-btn">Create new account</button>
+        <p>Already have an account? <a href="login.html" id="loginLink">Log In</a>
+</p>
+      </form>
+    </div>
+
+    <div class="image-section">
+      <img src="0.png" alt="Illustration">
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="grow-fade-loader">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </div>    <script>
+            function validateForm() {
+                var username = document.getElementById('username').value;
+                var email = document.getElementById('email').value;
+                var password = document.getElementById('password').value;
+                var confirmPassword = document.getElementById('confirm-password').value;
+                var contact = document.getElementById('contact-number').value;
+
+                if (username === '' || email === '' || password === '' || confirmPassword === '' || contact === '') {
+                    alert("All fields are required!");
+                    return false;
+                }
+
+                if (password !== confirmPassword) {
+                    alert("Passwords do not match!");
+                    return false;
+                }
+
+                var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    alert("Please enter a valid email ID.");
+                    return false;
+                }
+
+                var contactPattern = /^[0-9]{10}$/; 
+                if (!contactPattern.test(contact)) {
+                    alert("Please enter a valid 10-digit contact number.");
+                    return false;
+                }
+
+                alert("Your new account is ready! You are being redirected to login page");
+                window.open('login.html'); 
+                return false; 
+                
+            }
+
+                
+            document.addEventListener('DOMContentLoaded', () => {
+                const darkModeToggle = document.getElementById('darkModeToggle');
+                const body = document.body;
+
+                // Check for saved dark mode preference
+                const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+                darkModeToggle.checked = savedDarkMode;
+                applyDarkMode(savedDarkMode);
+
+                darkModeToggle.addEventListener('change', () => {
+                    const isDarkMode = darkModeToggle.checked;
+                    applyDarkMode(isDarkMode);
+                    localStorage.setItem('darkMode', isDarkMode); // Save preference
+                });
+
+                function applyDarkMode(isDarkMode) {
+                    if (isDarkMode) {
+                        body.classList.add('dark'); // Your CSS uses 'dark' for body
+                        document.querySelector('.container').classList.add('dark');
+                        document.querySelector('.signup-container').classList.add('dark');
+                        document.querySelector('.image-section').classList.add('dark');
+                    } else {
+                        body.classList.remove('dark');
+                        document.querySelector('.container').classList.remove('dark');
+                        document.querySelector('.signup-container').classList.remove('dark');
+                        document.querySelector('.image-section').classList.remove('dark');
+                    }
+                }
+            });
+
+            document.getElementById('loginLink').addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default link behavior (immediate navigation)
+
+                const loadingOverlay = document.getElementById('loadingOverlay');
+
+                // Add 'visible' class to trigger fade-in and display
+                loadingOverlay.classList.add('visible');
+
+                // Delay the navigation for 3 seconds
+                setTimeout(function() {
+                    window.location.href = 'login.html'; // Navigate to the login page
+                }, 3000); // 3000 milliseconds = 3 seconds
+            });
+    </script>
+
+</body>
+</html>
+
